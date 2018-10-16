@@ -19,6 +19,7 @@
 #include "draco/io/obj_decoder.h"
 #include "draco/io/parser_utils.h"
 #include "draco/io/ply_decoder.h"
+#include "draco/io/stl_decoder.h"
 
 namespace draco {
 
@@ -57,6 +58,14 @@ StatusOr<std::unique_ptr<Mesh>> ReadMeshFromFile(const std::string &file_name,
     PlyDecoder ply_decoder;
     if (!ply_decoder.DecodeFromFile(file_name, mesh.get()))
       return Status(Status::ERROR, "Unknown error.");
+    return std::move(mesh);
+  }
+  if (extension == "stl") {
+    // Stereolithography, STL, file format.
+    StlDecoder stl_decoder;
+    const Status stl_status = stl_decoder.DecodeFromFile(file_name, mesh.get());
+    if (!stl_status.ok())
+      return stl_status;
     return std::move(mesh);
   }
 

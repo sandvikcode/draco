@@ -491,7 +491,9 @@ set(draco_io_sources
     "${draco_src_root}/io/ply_reader.cc"
     "${draco_src_root}/io/ply_reader.h"
     "${draco_src_root}/io/point_cloud_io.cc"
-    "${draco_src_root}/io/point_cloud_io.h")
+    "${draco_src_root}/io/point_cloud_io.h"
+    "${draco_src_root}/io/stl_decoder.cc"
+    "${draco_src_root}/io/stl_decoder.h")
 
 set(draco_mesh_sources
     "${draco_src_root}/mesh/corner_table.cc"
